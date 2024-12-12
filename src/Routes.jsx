@@ -1,7 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router";
 import MainLayout from "./components/MainLayout";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
+import PageNotFound from "./pages/404Page";
 
 export default function AppRoutes() {
   return (
@@ -9,6 +10,7 @@ export default function AppRoutes() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/movie-details" element={<MovieDetails />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
   );

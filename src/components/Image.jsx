@@ -9,7 +9,6 @@ const Image = ({
   loading = 'lazy'
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
   const [imageSrc, setImageSrc] = useState(src);
 
   const handleError = () => {
@@ -24,13 +23,10 @@ const Image = ({
   };
 
   return (
-    <div className={`image-container ${className}`}>
-      {isLoading && !hasError && (
-        <div className="loading-skeleton animate-pulse">
-          Loading...
-        </div>
-      )}
-      
+    <div className={`image-container ${className}`} 
+    style={{
+      '--aspect-ratio': 4/3,
+    }}>
       <img
         src={imageSrc}
         alt={alt}
@@ -39,12 +35,6 @@ const Image = ({
         onLoad={handleLoad}
         loading={loading}
       />
-
-      {hasError && (
-        <div className="error-message">
-          Failed to load image
-        </div>
-      )}
     </div>
   );
 };

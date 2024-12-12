@@ -1,8 +1,11 @@
 /* Header */
 
 .header {
-  background-color: #333;
-  padding: 1rem;
+  background-color: var(--color-background);
+  padding: 2.4rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 .header nav ul {
@@ -13,9 +16,10 @@
 .header nav a {
   color: white;
   text-decoration: none;
+  padding: 0;
 }
 
-.navbar-nav li a {
+.navbar-nav li:not(.btn) {
   padding: 0.4rem 1rem;
 }
 
@@ -46,12 +50,16 @@
   position: absolute;
   height: 4px;
   width: 100%;
-  background: #FFF;
+  background: var(--color-foreground);
   border-radius: 9px;
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
   transition: .25s ease-in-out;
+}
+
+.header-searchbar {
+  padding-top: 20px;
 }
 
 .burger span:nth-of-type(1) {
@@ -89,7 +97,7 @@
 }
 
 @media (min-width: 1280px) {
-  .navbar-nav li a {
+  .navbar-nav li:not(.btn) {
     padding: 0.4rem 1.5rem;
   }
 }
