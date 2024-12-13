@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Image = ({ 
@@ -31,9 +31,19 @@ const Image = ({
       setCalculatedRatio(ratio);
     }
     
+    localStorage.setItem(src, img.src);
+    
     setIsLoading(false);
     onLoadProp?.(event);
-  }, [aspectRatio, onLoadProp]);
+  }, [aspectRatio, onLoadProp, src]);
+
+  useEffect(() => {
+    const cachedImage = localStorage.getItem(src);
+    if (cachedImage) {
+      setImageSrc(cachedImage);
+      setIsLoading(false);
+    }
+  }, [src]);
 
   const finalRatio = (() => {
     if (aspectRatio === 'adapt') {
@@ -51,7 +61,7 @@ const Image = ({
 
   return (
     <div 
-      className={`image-wrapper ${className || ''}`} 
+      className={`${className || ''}`} 
       style={{
         aspectRatio: finalRatio,
         position: 'relative',

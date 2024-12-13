@@ -1,4 +1,4 @@
-import Image from '../components/Image';
+import Image from './Image';
 import Navigation from './HeaderNavigation';
 import '../shared/styles/header.css';
 import { Link } from 'react-router';
