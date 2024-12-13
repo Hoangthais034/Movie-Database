@@ -5,7 +5,7 @@ export default function FooterLinkSection({ title, links }) {
   return (
     <div className="footer-nav">
       <h4>{title}</h4>
-      <ul className='grid gap-2'>
+      <ul className='grid gap-3'>
         {links.map((link, index) => (
           <li key={index} className='subtext'>
             <Link to={link.url} className='reversed-link'>{link.text}</Link>

@@ -39,6 +39,7 @@ export default function Footer() {
               className="logo-image shrink-0"
               loading="eager"
               fallback="/src/assets/react.svg"
+              aspectRatio="adapt"
             />
           </Link>
           <p>5th Avenue st, Manhattan New York, NY 10001</p>
