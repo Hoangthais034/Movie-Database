@@ -18,7 +18,7 @@
 }
 
 .tab-slider__control ul.tab-links li.active a {
-  color: #dcf836;
+  color: var(--color-active);
 }
 
 .tab-slider__control .tabs-swiper-pagination {
@@ -58,7 +58,7 @@
 }
 
 .tab-slider__wrapper:hover .tab-slider__meta .movie-title {
-  color: #dcf836;
+  color: var(--color-active);
 }
 
 .tab-slider__meta .movie-ratings {

@@ -41,13 +41,14 @@ html {
   --color-foreground: #FFF;
   --color-foreground-secondary: #4280bf;
   --color-subtext: #abb7c4;
-  --animation-nav: .5s cubic-bezier(.6, 0, .4, 1);
+  --color-active: #dcf836;
   --animation-default: .5s cubic-bezier(.3, 1, .3, 1);
-  --animation-fast: .3s cubic-bezier(.7, 0, .3, 1);
   --transform-origin-start: left;
   --transform-origin-end: right;
   --duration-default: 200ms;
   --duration-image: 1000ms;
+
+  --page-padding: 1.5rem;
 }
 
 *,
@@ -74,10 +75,6 @@ body {
 .page-width {
   margin: 0 auto;
   padding-inline: var(--page-padding);
-}
-
-:root {
-  --page-padding: 1.5rem;
 }
 
 .subtext {
@@ -128,6 +125,23 @@ body {
   width: 100%;
   height: auto;
   overflow: hidden;
+}
+
+.hover-scale {
+  overflow: hidden;
+}
+
+.hover-scale .hover-scale-up {
+  --scale-x: 1;
+  --scale-y: 1;
+  transition: var(--animation-default);
+  transition-property: transform;
+  transform: scaleX(var(--scale-x)) scaleY(var(--scale-y));
+}
+
+.hover-scale:hover .hover-scale-up {
+  --scale-x: 1.08;
+  --scale-y: 1.08;
 }
 
 .loading-skeleton {
@@ -302,7 +316,7 @@ body {
 
 .swiper-pagination-bullet-active {
   opacity: 1;
-  background: var(--color-foreground);
+  background: var(--color-active);
 }
 
 .swiper-button-lock {

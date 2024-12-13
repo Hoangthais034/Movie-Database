@@ -28,10 +28,10 @@ export default function TabsSlider({ title = "Title" }) {
       <div className="tab-slider-container grid gap-5">
         <div className='tab-slider__control flex justify-between items-center flex-wrap'>
           <ul className={`tab-links flex tab-links-${sliderId}`}>
-            <li className={activeTab === 1 ? "active" : ""} onClick={() => setActiveTab(1)}><a href="#tab1">#Popular</a></li>
-            <li className={activeTab === 2 ? "active" : ""} onClick={() => setActiveTab(2)}><a href="#tab2"> #Coming soon</a></li>
-            <li className={activeTab === 3 ? "active" : ""} onClick={() => setActiveTab(3)}><a href="#tab3">  #Top rated  </a></li>
-            <li className={activeTab === 4 ? "active" : ""} onClick={() => setActiveTab(4)}><a href="#tab4"> #Most reviewed</a></li>                        
+            <li className={activeTab === 1 ? "active" : ""} onClick={() => setActiveTab(1)}><a href="#tab1">#Best</a></li>
+            <li className={activeTab === 2 ? "active" : ""} onClick={() => setActiveTab(2)}><a href="#tab2">#Airing</a></li>
+            <li className={activeTab === 3 ? "active" : ""} onClick={() => setActiveTab(3)}><a href="#tab3">#Premieres</a></li>
+            <li className={activeTab === 4 ? "active" : ""} onClick={() => setActiveTab(4)}><a href="#tab4">#Trending</a></li>                        
           </ul>
           <div className={`tabs-swiper-pagination tabs-pagination-${sliderId}`}></div>
         </div>
@@ -50,23 +50,23 @@ export default function TabsSlider({ title = "Title" }) {
               loop={true}
               breakpoints={{
                 320: {
-                  slidesPerView: 2,
+                  slidesPerView: 1,
                   spaceBetween: 10
                 },
                 480: {
-                  slidesPerView: 3,
+                  slidesPerView: 2,
                   spaceBetween: 15
                 },
                 768: {
-                  slidesPerView: 4,
+                  slidesPerView: 3,
                   spaceBetween: 20
                 },
                 1024: {
-                  slidesPerView: 5,
+                  slidesPerView: 4,
                   spaceBetween: 25
                 },
                 1280: {
-                  slidesPerView: 6,
+                  slidesPerView: 5,
                   spaceBetween: 30
                 }
               }}
@@ -74,8 +74,8 @@ export default function TabsSlider({ title = "Title" }) {
             >
               {[...Array(12)].map((_, slideIndex) => (
                 <SwiperSlide key={slideIndex}>
-                  <div className="tab-slider__wrapper flex relative">
-                    <div className="tab-slider__image w-full">
+                  <div className="tab-slider__wrapper hover-scale flex relative">
+                    <div className="tab-slider__image hover-scale-up w-full">
                       <Image
                         src={`/poster1.jpg`}
                         alt={`Movie poster ${slideIndex + 1}`}

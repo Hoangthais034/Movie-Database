@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTrendingMovies } from '../services/FetchingMovieTrending';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import Image from './Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -36,9 +36,13 @@ export default function SlideShow() {
   return (
     <div className="slideshow-container">
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[EffectFade, Navigation, Pagination]}
         spaceBetween={30}
+        effect={'fade'}
         slidesPerView={1}
+        fadeEffect= {{
+          crossFade: true 
+        }}
         navigation={{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
