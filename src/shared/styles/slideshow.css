@@ -1,0 +1,142 @@
+.section-slideshow {
+  background-image: url(/slider-bg2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  background: transparent;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slideshow__wrapper {
+  padding-block: 80px;
+  margin: 0 auto;
+  max-width: 92rem;
+}
+
+.swiper-button::after {
+  display: none;
+}
+
+.swiper-button {
+  color: var(--color-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  box-sizing: border-box;
+  transition: all 0.4s ease-out;
+}
+
+.swiper-pagination-bullet {
+  opacity: 0.5;
+  background: var(--color-foreground);
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color-foreground);
+}
+
+.slideshow__contents {
+  padding: 0 24px;
+  display: flex;
+  justify-items: start;
+  text-align: left;
+  flex-direction: column;
+}
+
+.slideshow__contents .slideshow__movie-name {
+  margin-bottom: 15px;
+}
+
+.slideshow__contents .slideshow__movie-name .movie-time-release {
+  font-size: 36px;
+  color: var(--color-subtext);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-left: 12px;
+}
+
+.slideshow__movie-atc {
+  margin-bottom: 15px;
+}
+
+.slideshow__contents .social-btn {
+  color: var(--color-foreground);
+  display: flex;
+  align-items: center;
+  color: #dd003f;
+  margin-right: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'Dosis', sans-serif;
+  margin-bottom: 8px;
+}
+
+.slideshow__contents .social-btn .icon {
+  height: 36px;
+  width: 36px;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 1px solid #dd003f;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideshow__image {
+  padding: 0 24px;
+}
+
+.slideshow__image .image-wrapper {
+  max-width: 27rem;
+  margin-inline: auto 0;
+}
+
+
+.movie-infor {
+  list-style: none;
+  padding-left: 0;
+  gap: 1.2rem 3rem;
+}
+
+.movie-infor li {
+  color: var(--color-subtext);
+}
+
+.movie-infor li .rating-score {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--color-foreground);
+}
+
+.movie-infor li::after {
+  content: "|";
+  position: absolute;
+  right: -15px;
+  bottom: 0;
+  font-size: 14px;
+}
+
+.movie-infor li:last-child::after {
+  display: none;
+}
