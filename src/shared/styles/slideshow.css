@@ -14,13 +14,6 @@
   background: transparent;
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .slideshow__image {
   padding: 0 16px;
 }
@@ -82,6 +75,9 @@
   margin-inline: auto 0;
 }
 
+.slideshow__image img {
+  aspect-ratio: 3/4;
+}
 
 .movie-infor {
   list-style: none;
