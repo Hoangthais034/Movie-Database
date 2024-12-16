@@ -38,12 +38,16 @@ export default function SlideTrailer({title}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imagesNavSlider, setImagesNavSlider] = useState(null);
+  const [activeMovie, setActiveMovie] = useState(null);
+  const [trailerUrl, setTrailerUrl] = useState(null);
+  const [showTrailer, setShowTrailer] = useState(false);
 
   useEffect(() => {
     const getTrendingMovies = async () => {
       try {
         const data = await fetchTrendingMovies(5);
         setMovies(data);
+        setActiveMovie(data[0]); // Set initial active movie
       } catch (err) {
         setError(err);
       } finally {
@@ -53,6 +57,27 @@ export default function SlideTrailer({title}) {
 
     getTrendingMovies();
   }, []);
+
+  const handleSlideChange = (swiper) => {
+    const currentMovie = movies[swiper.realIndex];
+    setActiveMovie(currentMovie);
+  };
+
+  const handleTrailerClick = async () => {
+    try {
+      if (!activeMovie) return;
+      
+      const trailerResult = await movieTrailer(activeMovie.title);
+      if (trailerResult) {
+        setTrailerUrl(trailerResult);
+        setShowTrailer(true);
+      } else {
+        console.log('No trailer found');
+      }
+    } catch (error) {
+      console.error('Error fetching trailer:', error);
+    }
+  };
 
   if (loading) {
     return (
@@ -82,10 +107,29 @@ export default function SlideTrailer({title}) {
       </div>
       <div className="slide-trailer__flex">
         <div className="slide-trailer__images">
-        {movies.map((movie, index) => (
-          index === 0 && console.log(movie.title)
-        ))}
-
+          {activeMovie && (
+            <div className="active-movie-container">
+              <Image
+                src={`https://simkl.in/posters/${activeMovie.poster}_w.webp`}
+                alt={activeMovie.title}
+                className="active-movie-image cursor-pointer"
+                onClick={handleTrailerClick}
+                loading="lazy"
+                fallback="/src/assets/react.svg"
+                aspectRatio="16/9"
+              />
+              <div className="active-movie-info">
+                <h3>{activeMovie.title}</h3>
+                <p>{activeMovie.release_date}</p>
+                <button 
+                  className="watch-trailer-btn"
+                  onClick={handleTrailerClick}
+                >
+                  Watch Trailer
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="slide-trailer__col">
@@ -100,6 +144,7 @@ export default function SlideTrailer({title}) {
                 nextEl: ".slide-trailer__next",
                 prevEl: ".slide-trailer__prev"
               }}
+              onSlideChange={handleSlideChange}
               className="swiper-container1"
               breakpoints={{
                 0: {
@@ -134,6 +179,28 @@ export default function SlideTrailer({title}) {
           <div className="slide-trailer__next">Next</div>
         </div>
       </div>
+
+      {showTrailer && trailerUrl && (
+        <div className="trailer-popup">
+          <div className="trailer-popup-content">
+            <button 
+              className="close-trailer"
+              onClick={() => setShowTrailer(false)}
+            >
+              ×
+            </button>
+            <iframe
+              width="100%"
+              height="100%"
+              src={trailerUrl.replace('watch?v=', 'embed/')}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
