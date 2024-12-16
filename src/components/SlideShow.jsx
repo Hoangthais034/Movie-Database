@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTrendingMovies } from '../services/FetchingMovieTrending';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { FetchingMovie } from '../services/FetchingMovie';
 import { Navigation, Pagination, EffectFade } from 'swiper/modules';
+import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
 import Image from './Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../shared/styles/slideshow.css';
-import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export default function SlideShow() {
+export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getTrendingMovies = async () => {
-      try {
-        const data = await fetchTrendingMovies();
-        setMovies(data);
-        console.log(data)
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchMovies = async (type, object, interval, limit) => {
+    try {
+      const data = await FetchingMovie(type, object, interval, limit);
+      setMovies(data);
+      console.log(data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    getTrendingMovies();
-  }, []);
+  useEffect(() => {
+    fetchMovies(dataType, dataObject, dataInterval, totalItems);
+  }, [dataType, dataObject, dataInterval, totalItems]);
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error fetching movies: {error.message}</div>;
@@ -51,7 +52,6 @@ export default function SlideShow() {
           clickable: true,
           el: '.swiper-pagination'
         }}
-        loop={true}
       >
         {movies.map((movie, index) => (
           <SwiperSlide key={index}>
@@ -79,7 +79,7 @@ export default function SlideShow() {
                 </div>
                 <div className='slideshow__movie-meta flex items-end flex-wrap'>
                   <ul className="movie-infor m-0 flex items-end flex-wrap">
-                    <li className='relative'>  <RiStarFill size={16} color='#f5b50a' /><span className='rating-score'>{movie.ratings.imdb.rating}</span> /10 </li>
+                    <li className='relative'>  <RiStarFill size={16} color='#f5b50a' /><span className='rating-score'>{movie.ratings.simkl.rating}</span> /10 </li>
                     <li className='relative'>  Run Time: {movie.runtime} </li>
                     <li className='relative'>  Release: {new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</li>
                   </ul>
