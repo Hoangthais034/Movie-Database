@@ -37,7 +37,6 @@ export default function SlideTrailer({title}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [imagesNavSlider, setImagesNavSlider] = useState(null);
   const [activeMovie, setActiveMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
