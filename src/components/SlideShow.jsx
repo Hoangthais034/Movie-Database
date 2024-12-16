@@ -11,28 +11,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const fetchMovies = async (type, object, interval, limit) => {
-    try {
-      const data = await FetchingMovie(type, object, interval, limit);
-      setMovies(data);
-      console.log(data);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
+    const data = await FetchingMovie(type, object, interval, limit);
+    setMovies(data);
+    console.log(data);
   };
 
   useEffect(() => {
     fetchMovies(dataType, dataObject, dataInterval, totalItems);
   }, [dataType, dataObject, dataInterval, totalItems]);
-
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching movies: {error.message}</div>;
 
   return (
     <div className="slideshow-container">
@@ -89,10 +77,10 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
               </div>
               <div className='slideshow__image w-4/12 hidden md:block'>
                 <Image
-                  src={`https://wsrv.nl/?url=https://simkl.in/posters/${movie.poster}_m.webp`}
+                  src={`https://simkl.in/posters/${movie.poster}_m.webp`}
                   alt="Movie poster"
                   className="image--wrapper shrink-0"
-                  loading="eager"
+                  loading="lazy"
                   fallback="/src/assets/react.svg"
                   aspectRatio="adapt"
                 />

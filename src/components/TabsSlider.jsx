@@ -15,25 +15,16 @@ let tabCounter = 0;
 export default function TabsSlider({ title, dataType, dataObject, dataInterval, totalItems }) {
   
     const [moviesByTab, setMoviesByTab] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const fetchMovies = async (type, objects, interval, limit) => {
-        try {
-            const objectArray = objects.split(',');
-            const allMovies = {};
+      const objectArray = objects.split(',');
+      const allMovies = {};
 
-            for (const object of objectArray) {
-                const data = await FetchingMovie(type, object.trim(), interval, limit);
-                allMovies[object.trim()] = data;
-            }
-            setMoviesByTab(allMovies);
-            console.log(allMovies);
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
+      for (const object of objectArray) {
+          const data = await FetchingMovie(type, object.trim(), interval, limit);
+          allMovies[object.trim()] = data;
+      }
+      setMoviesByTab(allMovies);
     };
 
     useEffect(() => {
@@ -43,8 +34,6 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
     const [activeTab, setActiveTab] = useState(1);
     const [sliderId] = useState(() => `tab-slider-${++tabCounter}`);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error fetching movies: {error.message}</div>;
 
     return (
         <>
@@ -109,10 +98,10 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                                     <div className="tab-slider__wrapper hover-scale flex relative">
                                         <div className="tab-slider__image hover-scale-up w-full">
                                             <Image
-                                                src={`https://wsrv.nl/?url=https://simkl.in/posters/${movie.poster}_m.webp`}
+                                                src={`https://simkl.in/posters/${movie.poster}_m.webp`}
                                                 alt={`Movie poster ${slideIndex + 1}`}
                                                 className="image--wrapper shrink-0"
-                                                loading="eager"
+                                                loading="lazy"
                                                 fallback="/src/assets/react.svg"
                                                 aspectRatio="3/4"
                                             />

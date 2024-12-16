@@ -37,7 +37,7 @@ export default function Footer() {
               src="/logo1.png"
               alt="Company Logo"
               className="logo-image shrink-0"
-              loading="eager"
+              loading="lazy"
               fallback="/src/assets/react.svg"
               aspectRatio="adapt"
             />
