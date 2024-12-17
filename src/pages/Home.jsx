@@ -1,6 +1,6 @@
-import SlideShow from '../components/SlideShow';
-import TabsSlider from '../components/TabsSlider';
-import SlideTrailer from '../components/SlideTrailer';
+import SlideShow from '../components/Slideshow/SlideShow';
+import TabsSlider from '../components/TabSlider/TabsSlider';
+import SlideTrailer from '../components/SlideTrailer/SlideTrailer';
 
 export default function Home() {
   return (

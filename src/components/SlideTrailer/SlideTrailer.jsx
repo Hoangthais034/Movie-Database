@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import axios from "axios";
-import Image from './Image';
+import Image from '../Image/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { Navigation, Thumbs } from 'swiper/modules';
-import '../shared/styles/slide-trailers.css';
+import '../../shared/styles/slide-trailers.css';
 import { Link } from 'react-router';
 import movieTrailer from 'movie-trailer';
+import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
+
 
 const API_URL = "https://api.simkl.com/movies/trending/";
 const API_KEY = import.meta.env.VITE_SIMKL_CLIENT_ID;
@@ -36,7 +38,6 @@ const fetchTrendingMovies = async (totalMovies = 5) => {
 export default function SlideTrailer({title}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [activeMovie, setActiveMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
@@ -46,9 +47,7 @@ export default function SlideTrailer({title}) {
       try {
         const data = await fetchTrendingMovies(5);
         setMovies(data);
-        setActiveMovie(data[0]); // Set initial active movie
-      } catch (err) {
-        setError(err);
+        setActiveMovie(data[0]);
       } finally {
         setLoading(false);
       }
@@ -60,6 +59,7 @@ export default function SlideTrailer({title}) {
   const handleSlideChange = (swiper) => {
     const currentMovie = movies[swiper.realIndex];
     setActiveMovie(currentMovie);
+    console.log(currentMovie);
   };
 
   const handleTrailerClick = async () => {
@@ -80,16 +80,8 @@ export default function SlideTrailer({title}) {
 
   if (loading) {
     return (
-      <div className="slide-trailer">
+      <div className="slide-trailer overflow-hidden relative">
         <div className="loading-skeleton" style={{ aspectRatio: '16/9' }} />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="slide-trailer">
-        <div className="error-message">Error loading trailers: {error.message}</div>
       </div>
     );
   }
@@ -107,23 +99,20 @@ export default function SlideTrailer({title}) {
       <div className="slide-trailer__flex">
         <div className="slide-trailer__images">
           {activeMovie && (
-            <div className="active-movie-container">
+            <div className="active-movie-container overflow-hidden">
               <Image
+                key={activeMovie.poster}
                 src={`https://simkl.in/posters/${activeMovie.poster}_w.webp`}
                 alt={activeMovie.title}
                 className="active-movie-image cursor-pointer"
-                onClick={handleTrailerClick}
                 loading="lazy"
                 fallback="/src/assets/react.svg"
                 aspectRatio="16/9"
               />
               <div className="active-movie-info">
                 <h3>{activeMovie.title}</h3>
-                <p>{activeMovie.release_date}</p>
-                <button 
-                  className="watch-trailer-btn"
-                  onClick={handleTrailerClick}
-                >
+                <p>{new Date(activeMovie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                <button className="watch-trailer-btn" onClick={handleTrailerClick}>
                   Watch Trailer
                 </button>
               </div>
@@ -132,32 +121,30 @@ export default function SlideTrailer({title}) {
         </div>
 
         <div className="slide-trailer__col">
-          <div className="slide-trailer__prev">Prev</div>
+          <div className="slide-trailer__prev"><RiArrowUpSLine size={32} color='#FFF'/></div>
           <div className="slide-trailer__thumbs">
             <Swiper
               direction="vertical"
-              spaceBetween={24}
-              slidesPerView={3}
+              spaceBetween={20}
+              slidesPerView={1}
               loop={true}
+              slideToClickedSlide={true}
+              onSlideChange={handleSlideChange}
               navigation={{
                 nextEl: ".slide-trailer__next",
                 prevEl: ".slide-trailer__prev"
               }}
-              onSlideChange={handleSlideChange}
-              className="swiper-container1"
               breakpoints={{
-                0: {
-                  direction: "horizontal"
-                },
                 768: {
-                  direction: "vertical"
+                  slidesPerView: 3,
+                  spaceBetween: 24
                 }
               }}
               modules={[Navigation, Thumbs]}
             >
               {movies.map((movie, index) => (
                 <SwiperSlide key={movie.id || index}>
-                  <div className="slide-trailer__image grid gap-4">
+                  <div className="slide-trailer__image grid gap-4 overflow-hidden">
                     <Image
                       src={`https://simkl.in/posters/${movie.poster}_w.webp`}
                       alt={movie.title || `Thumbnail ${index + 1}`}
@@ -167,15 +154,15 @@ export default function SlideTrailer({title}) {
                       aspectRatio="16/9"
                     />
                     <div className='slide-trailer__image-content'>
-                      <h4 className='trailer--title m-0'>{movie.title}</h4>
-                      <p className='trailer--release m-0 subtext'>{movie.release_date}</p>
+                      <p className='trailer--title m-0 font-heading'>{movie.title}</p>
+                      <p className='trailer--release m-0 subtext'>{new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     </div>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
-          <div className="slide-trailer__next">Next</div>
+          <div className="slide-trailer__next"><RiArrowDownSLine size={32} color='#FFF'/></div>
         </div>
       </div>
 
@@ -193,7 +180,6 @@ export default function SlideTrailer({title}) {
               height="100%"
               src={trailerUrl.replace('watch?v=', 'embed/')}
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />

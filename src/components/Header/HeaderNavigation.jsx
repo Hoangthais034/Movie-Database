@@ -1,13 +1,12 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const checkMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
-    console.log(isMenuOpen)
   };
 
   return (
@@ -20,15 +19,15 @@ export default function Navigation() {
       </label>
       <nav className={`header-nav flex-1 flex justify-between ${isMenuOpen ? 'nav-active' : ''}`}>
         <ul className="nav navbar-nav flex-child-menu menu-left items-center">
-          <li><Link to="/" className='reversed-link'>Home</Link></li>
-          <li><Link to="/movies" className='reversed-link'>Movies</Link></li>
-          <li><Link to="/celebrities" className='reversed-link'>Celebrities</Link></li>
-          <li><Link to="/news" className='reversed-link'>News</Link></li>
-          <li><Link to="#" className='reversed-link'>Community</Link></li>
+          <li><NavLink to="/" className='reversed-link'>Home</NavLink></li>
+          <li><NavLink to="/movies" className='reversed-link'>Movies</NavLink></li>
+          <li><NavLink to="/celebrities" className='reversed-link'>Celebrities</NavLink></li>
+          <li><NavLink to="/news" className='reversed-link'>News</NavLink></li>
+          <li><NavLink to="#" className='reversed-link'>Community</NavLink></li>
         </ul>
         <ul className="nav navbar-nav flex-child-menu menu-right items-center">
-          <li><Link to="#" className='reversed-link'>Help</Link></li>
-          <li className="loginLink"><Link to="#" className='reversed-link'>Login</Link></li>
+          <li><NavLink to="#" className='reversed-link'>Help</NavLink></li>
+          <li className="loginLink"><NavLink to="#" className='reversed-link'>Login</NavLink></li>
           <li className="btn signupLink"><Link to="#">Sign up</Link></li>
         </ul>
       </nav>

@@ -1,26 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { FetchingMovie } from '../services/FetchingMovie';
+import { FetchingMovie } from '../../services/FetchingMovie';
 import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
-import Image from './Image';
+import Image from '../Image/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import '../shared/styles/slideshow.css';
+import '../../shared/styles/slideshow.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
-
+  const [loading, setLoading] = useState(true);
+  
   const fetchMovies = async (type, object, interval, limit) => {
-    const data = await FetchingMovie(type, object, interval, limit);
-    setMovies(data);
-    console.log(data);
+    try {
+      const data = await FetchingMovie(type, object, interval, limit);
+      setMovies(data);
+    } finally {
+      setLoading(false);  
+    }
+
   };
 
   useEffect(() => {
     fetchMovies(dataType, dataObject, dataInterval, totalItems);
-  }, [dataType, dataObject, dataInterval, totalItems]);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="slideshow-container section-placeholder">
+        <div >
+              <div className='slideshow__wrapper flex'>
+                <div className='slideshow__contents md:w-8/12 w-full'>
+                  <div className='slideshow__movie-tags movie-tags flex gap-2'>
+                  {[...Array(4)].map((_, index) => (
+                    <span className='tag overlow-hidden relative' data-tag={index} key={index}> <div className="loading-skeleton" /></span>
+                  ))}
+  
+                  </div>
+                  <div className='slideshow__movie-name'>
+                    <div className='h1 text-upper overlow-hidden relative'>
+                      <div className="loading-skeleton" />
+                    </div>
+                    <div className='h1 text-upper overlow-hidden relative'>
+                      <div className="loading-skeleton" />
+                    </div>
+                  </div>
+                  <div className='slideshow__movie-atc flex flex-wrap'>
+                      <a href="#" className="social-btn">
+                        <div className='icon'><RiPlayFill size={16} /> </div>Watch Trailer
+                      </a>
+                      <a href="#" className="social-btn">
+                        <div className='icon'><RiHeartFill size={16} /> </div>Add to Favorite
+                      </a>
+                  </div>
+                  <div className='slideshow__movie-meta flex items-end flex-wrap'>
+                    <ul className="movie-infor m-0 flex items-end flex-wrap">
+                      <li className='relative overlow-hidden relative'><div className="loading-skeleton" /></li>
+                      <li className='relative overlow-hidden relative'><div className="loading-skeleton" /></li>
+                      <li className='relative overlow-hidden relative'><div className="loading-skeleton" /></li>
+                      <li className='relative overlow-hidden relative'><div className="loading-skeleton" /></li>
+                    </ul>
+                  </div>
+                  <div className='slideshow__movie-button overlow-hidden relative'>
+                    <div className="loading-skeleton" />
+                  </div>
+                </div>
+                <div className='slideshow__image w-4/12 hidden md:block no-empty overlow-hidden relative'>
+                  <div className="loading-skeleton" />
+                </div>
+              </div>
+        </div>
+      </div>
+      )
+  }
 
   return (
     <div className="slideshow-container">
@@ -72,15 +126,13 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
                     <li className='relative'>  Release: {new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</li>
                   </ul>
                 </div>
-                <div className='slideshow__movie-button'>
-                </div>
               </div>
               <div className='slideshow__image w-4/12 hidden md:block'>
                 <Image
                   src={`https://simkl.in/posters/${movie.poster}_m.webp`}
                   alt="Movie poster"
                   className="image--wrapper shrink-0"
-                  loading="lazy"
+                  loading={index === 0 ? "eager" : "lazy"}
                   fallback="/src/assets/react.svg"
                   aspectRatio="adapt"
                 />

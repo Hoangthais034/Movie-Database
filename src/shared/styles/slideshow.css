@@ -106,3 +106,26 @@
 .movie-infor li:last-child::after {
   display: none;
 }
+
+.section-placeholder .slideshow__image {
+  aspect-ratio: 3/4;
+}
+
+.section-placeholder .movie-tags span {
+  height: 14px;
+  width: 24px;
+}
+
+.section-placeholder .slideshow__movie-name>div:first-child {
+  margin-bottom: 12px;
+}
+
+.section-placeholder .slideshow__movie-name>div {
+  height: 76px;
+  width: 100%;
+}
+
+.section-placeholder .movie-infor li {
+  height: 14px;
+  width: 40px;
+}
