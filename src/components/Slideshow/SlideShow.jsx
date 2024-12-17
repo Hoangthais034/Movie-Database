@@ -8,12 +8,14 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../../shared/styles/slideshow.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   
+  const navigate = useNavigate();
+
   const fetchMovies = async (type, object, interval, limit) => {
     try {
       const data = await FetchingMovie(type, object, interval, limit);
@@ -27,6 +29,10 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
   useEffect(() => {
     fetchMovies(dataType, dataObject, dataInterval, totalItems);
   }, []);
+
+  const handleViewDetails = (movie) => {
+    navigate(`/movie-details/${movie.ids.simkl_id}`, { state: { movieData: movie } });
+  };
 
   if (loading) {
     return (
@@ -128,7 +134,12 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
                   </ul>
                 </div>
                 <div className='slideshow__movie-button'>
-                  <Link className="button flex" to={`/movie-details/${movie.ids.simkl_id}`}>View Details</Link>
+                  <button 
+                    className="button flex" 
+                    onClick={() => handleViewDetails(movie)}
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
 
