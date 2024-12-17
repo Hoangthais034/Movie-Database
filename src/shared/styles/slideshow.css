@@ -52,32 +52,6 @@
   margin-bottom: 15px;
 }
 
-.slideshow__contents .social-btn {
-  color: var(--color-foreground);
-  display: flex;
-  align-items: center;
-  color: #dd003f;
-  margin-right: 24px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-family: 'Dosis', sans-serif;
-  margin-bottom: 8px;
-}
-
-.slideshow__contents .social-btn .icon {
-  height: 36px;
-  width: 36px;
-  text-align: center;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  border: 1px solid #dd003f;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
 .slideshow__image .image--wrapper {
