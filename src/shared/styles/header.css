@@ -29,8 +29,8 @@ nav a {
 
 .burger {
   position: relative;
-  width: 40px;
-  height: 30px;
+  width: 30px;
+  height: 20px;
   background: transparent;
   cursor: pointer;
   display: block;
@@ -43,7 +43,7 @@ nav a {
 .burger span {
   display: block;
   position: absolute;
-  height: 4px;
+  height: 2px;
   width: 100%;
   background: var(--color-foreground);
   border-radius: 9px;
@@ -87,7 +87,7 @@ nav a {
 
 .burger input:checked~span:nth-of-type(3) {
   transform: rotate(-45deg);
-  top: 28px;
+  top: 22px;
   left: 5px;
 }
 
@@ -98,6 +98,12 @@ nav a {
 }
 
 @media (max-width: 1023.99px) {
+
+  .header-nav-inner {
+    overflow: hidden;
+    /* 4 */
+  }
+
   header .header-nav {
     position: absolute;
     border-top: none !important;
@@ -110,12 +116,25 @@ nav a {
     top: 100%;
     width: 100%;
     inset-inline: 0;
+    flex-direction: column;
+    padding-bottom: 24px;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s ease-in-out;
   }
 
+  .header nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-inline: var(--page-padding);
+  }
 
-  header .header-nav.nav-active {
-    transform: translateY(0);
+  header .header-nav[aria-hidden="false"] {
+    grid-template-rows: 1fr;
     opacity: 1;
     z-index: 5;
+    background-color: var(--color-background);
+    transition: grid-template-rows 0.5s ease-in-out;
   }
 }

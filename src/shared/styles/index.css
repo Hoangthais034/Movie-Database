@@ -113,6 +113,7 @@ body {
   }
 }
 
+.button,
 .btn a {
   background-color: #dd003f;
   color: #ffffff;
@@ -121,6 +122,7 @@ body {
   -moz-border-radius: 20px;
   border-radius: 20px;
   text-decoration: none;
+  display: flex;
 }
 
 /* Image Style */
@@ -296,6 +298,11 @@ div:empty:not(.fixed-overlay, .bg-overlay, .empty-space, .drawer__body, .no-empt
 }
 
 /* Slider */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
 .slideshow__wrapper {
   padding-block: 80px;
   margin: 0 auto;
@@ -329,6 +336,14 @@ div:empty:not(.fixed-overlay, .bg-overlay, .empty-space, .drawer__body, .no-empt
 
 .swiper-button-lock {
   display: none !important;
+}
+
+.swiper-slide {
+  z-index: -10;
+}
+
+.swiper-slide.swiper-slide-active {
+  z-index: 1;
 }
 
 /* Heading section */

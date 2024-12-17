@@ -57,6 +57,10 @@
   transition: all 0.4s ease-out;
 }
 
+.tab-slider__wrapper {
+  cursor: pointer;
+}
+
 .tab-slider__wrapper:hover .tab-slider__meta .movie-title {
   color: var(--color-active);
 }

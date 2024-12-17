@@ -59,7 +59,6 @@ export default function SlideTrailer({title}) {
   const handleSlideChange = (swiper) => {
     const currentMovie = movies[swiper.realIndex];
     setActiveMovie(currentMovie);
-    console.log(currentMovie);
   };
 
   const handleTrailerClick = async () => {

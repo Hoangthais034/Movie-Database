@@ -9,8 +9,8 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/movie-details" element={<MovieDetails />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route exact path="/movie-details/:id" element={<MovieDetails />} />
       </Route>
     </Routes>
   );

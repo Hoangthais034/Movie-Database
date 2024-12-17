@@ -108,8 +108,8 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                             }}
                             loop={true}
                             breakpoints={{
-                              320: {
-                                slidesPerView: 3,
+                              460: {
+                                slidesPerView: 2,
                                 spaceBetween: 10
                               },
                               768: {

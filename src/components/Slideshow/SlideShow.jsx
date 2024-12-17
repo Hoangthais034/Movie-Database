@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../../shared/styles/slideshow.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link } from 'react-router';
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
@@ -126,7 +127,11 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
                     <li className='relative'>  Release: {new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</li>
                   </ul>
                 </div>
+                <div className='slideshow__movie-button'>
+                  <Link className="button flex" to={`/movie-details/${movie.ids.simkl_id}`}>View Details</Link>
+                </div>
               </div>
+
               <div className='slideshow__image w-4/12 hidden md:block'>
                 <Image
                   src={`https://simkl.in/posters/${movie.poster}_m.webp`}
@@ -142,12 +147,12 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
         ))}
 
         {/* Custom Navigation Buttons */}
-        <div className="swiper-button swiper-button-prev hidden lg:block">
+        <div className="swiper-button swiper-button-prev">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
-        <div className="swiper-button swiper-button-next hidden lg:block">
+        <div className="swiper-button swiper-button-next">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

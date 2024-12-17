@@ -2,13 +2,13 @@ import axios from "axios";
 
 const API_URL = "https://api.simkl.com/";
 const API_KEY = import.meta.env.VITE_SIMKL_CLIENT_ID;
-const cache = {};
+const cache = new Map();
 
 export const FetchingMovie = async (type, object, interval, limit) => {
   const cacheKey = `${type}-${object}-${interval}-${limit}`;
-  
-  if (cache[cacheKey]) {
-    return cache[cacheKey];
+
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
   }
 
   try {
@@ -31,8 +31,9 @@ export const FetchingMovie = async (type, object, interval, limit) => {
       if (items.length >= limit) break;
     }
 
-    cache[cacheKey] = items.slice(0, limit);
-    return cache[cacheKey];
+    const result = items.slice(0, limit);
+    cache.set(cacheKey, result);
+    return result;
   } catch (error) {
     console.error(`Error fetching ${type} data:`, error);
     throw error;
