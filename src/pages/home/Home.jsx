@@ -1,4 +1,4 @@
-import SlideShow from './SlideShow';
+import SlideShow from './SlideShow/SlideShow';
 import TabsSlider from './TabsSlider';
 import SlideTrailer from './SlideTrailer';
 

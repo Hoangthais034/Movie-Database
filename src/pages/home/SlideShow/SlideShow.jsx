@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { FetchingMovie } from '../../services/FetchingMovie';
+import { FetchingMovie } from '../../../services/FetchingMovie';
 import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
-import Image from '../../components/Image';
+import Image from '../../../components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router';
-import Headings from '../../shared/styles/Typo';
-import { SectionSlideshow, SwiperButton, SlideshowImage, SlideshowContents, MovieATC, MovieInfor } from '../../shared/styles/SlideshowStyles';
+import Headings from '../../../shared/styles/Typo';
+import { SectionSlideshow, SwiperButton, SlideshowImage, SlideshowContents, MovieATC, MovieInfor } from './StylesSlideshow';
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
@@ -33,10 +33,9 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
     navigate(`/movie-details/${movie.ids.simkl_id}`, { state: { movieData: movie } });
   };
 
-  
 
   return (
-    <SectionSlideshow className={}>
+    <SectionSlideshow>
       <Swiper
         modules={[EffectFade, Navigation, Pagination]}
         spaceBetween={30}

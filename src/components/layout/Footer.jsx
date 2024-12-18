@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import Image from '../Image';
 import FooterLinkSection from './FooterLinkSection';
 import '../../shared/styles/footer.css';
-import Headings from '../../shared/styles/StyleIndex'
+import Headings from '../../shared/styles/Typo'
 
 const footerLinks = {
   resources: [

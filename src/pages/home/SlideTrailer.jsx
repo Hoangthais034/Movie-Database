@@ -10,15 +10,14 @@ import '../../shared/styles/slide-trailers.css';
 import { Link } from 'react-router';
 import movieTrailer from 'movie-trailer';
 import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
-import Headings from '../../shared/styles/StyleIndex'
+import Headings from '../../shared/styles/Typo'
 
-const API_URL = "https://api.simkl.com/movies/trending/";
+const API_URL = "https://api.simkl.com/movies/genres/action/this-year/revenue/";
 const API_KEY = import.meta.env.VITE_SIMKL_CLIENT_ID;
 const fetchTrendingMovies = async (totalMovies = 5) => {
   try {
     const response = await axios.get(API_URL, {
       params: {
-        release_box: 'next_12',
         extended: "title,genres,tmdb",
         langs: 'en',
         client_id: API_KEY,
@@ -26,6 +25,7 @@ const fetchTrendingMovies = async (totalMovies = 5) => {
     });
 
     if (response.data) {
+      console.log(response.data)
       return response.data.slice(0, totalMovies);
     }
     return [];
@@ -100,8 +100,8 @@ export default function SlideTrailer({title}) {
           {activeMovie && (
             <div className="active-movie-container overflow-hidden">
               <Image
-                key={activeMovie.poster}
-                src={`https://simkl.in/posters/${activeMovie.poster}_w.webp`}
+                key={activeMovie.fanart}
+                src={`https://simkl.in/fanart/${activeMovie.fanart}_medium.webp`}
                 alt={activeMovie.title}
                 className="active-movie-image cursor-pointer"
                 loading="lazy"

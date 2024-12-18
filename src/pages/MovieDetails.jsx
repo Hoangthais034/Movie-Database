@@ -2,7 +2,7 @@ import Image from "../components/Image";
 import { useLocation } from "react-router";
 import React, { useEffect, useState } from 'react';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
-import Headings from '../shared/styles/StyleIndex'
+import Headings from '../shared/styles/Typo'
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState(null);

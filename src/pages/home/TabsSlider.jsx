@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import '../../shared/styles/tabslider.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Headings from '../../shared/styles/StyleIndex'
+import Headings from '../../shared/styles/Typo'
 
 let tabCounter = 0;
 

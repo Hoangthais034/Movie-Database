@@ -1,6 +1,6 @@
 import React from "react";
 import '../shared/styles/404page.css';
-import Headings from '../shared/styles/StyleIndex'
+import Headings from '../shared/styles/Typo'
 
 const PageNotFound = () => {
     return (

@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-import Headings from '../../shared/styles/StyleIndex'
+import Headings from '../../shared/styles/Typo'
 
 export default function FooterLinkSection({ title, links }) {
   return (
