@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import axios from "axios";
-import Image from '../Image/Image';
+import Image from '../../components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
@@ -10,7 +10,7 @@ import '../../shared/styles/slide-trailers.css';
 import { Link } from 'react-router';
 import movieTrailer from 'movie-trailer';
 import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
-
+import Headings from '../../shared/styles/StyleIndex'
 
 const API_URL = "https://api.simkl.com/movies/trending/";
 const API_KEY = import.meta.env.VITE_SIMKL_CLIENT_ID;
@@ -89,7 +89,7 @@ export default function SlideTrailer({title}) {
     <div className="slide-trailer">
       <div className='section-heading flex justify-between items-center'>
           <div className='section__title'>
-              <h2 className='h3'>{title}</h2>
+              <Headings as="h2" className='h3'>{title}</Headings>
           </div>
           <div className='section__btn btn'>
               <Link to="#">View All</Link>
@@ -109,7 +109,7 @@ export default function SlideTrailer({title}) {
                 aspectRatio="16/9"
               />
               <div className="active-movie-info">
-                <h3>{activeMovie.title}</h3>
+                <Headings as="h3">{activeMovie.title}</Headings>
                 <p>{new Date(activeMovie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 <button className="watch-trailer-btn" onClick={handleTrailerClick}>
                   Watch Trailer

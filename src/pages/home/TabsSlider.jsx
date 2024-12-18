@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { FetchingMovie } from '../../services/FetchingMovie';
-import Image from '../Image/Image';
+import Image from '../../components/Image';
 import { RiStarFill } from "@remixicon/react";
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../../shared/styles/tabslider.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Headings from '../../shared/styles/StyleIndex'
 
 let tabCounter = 0;
 
@@ -43,7 +44,7 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
         <>
             <div className='section-heading flex justify-between items-center'>
                 <div className='section__title'>
-                    <h2 className='h3'></h2>
+                    <Headings as="h2" className='h3'></Headings>
                 </div>
                 <div className='section__btn btn'>
                     <Link to="#">View All</Link>
@@ -77,7 +78,7 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
         <>
             <div className='section-heading flex justify-between items-center'>
                 <div className='section__title'>
-                    <h2 className='h3'>{title}</h2>
+                    <Headings as="h2" className='h3'>{title}</Headings>
                 </div>
                 <div className='section__btn btn'>
                     <Link to="#">View All</Link>

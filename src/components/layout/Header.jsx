@@ -1,11 +1,9 @@
-import Image from '../Image/Image';
+import Image from '../Image';
 import Navigation from './HeaderNavigation';
 import '../../shared/styles/header.css';
 import { Link } from 'react-router';
 
 export default function Header() {
-
-
   return (
     <header className="header flex justify-between page-width items-center flex-wrap">
       <div className="header-logo">

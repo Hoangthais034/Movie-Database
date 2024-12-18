@@ -1,10 +1,11 @@
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
+import Headings from '../../shared/styles/StyleIndex'
 
 export default function FooterLinkSection({ title, links }) {
   return (
     <div className="footer-nav">
-      <h4>{title}</h4>
+      <Headings as="h4" >{title}</Headings>
       <ul className='grid gap-3'>
         {links.map((link, index) => (
           <li key={index} className='subtext'>

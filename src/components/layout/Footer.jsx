@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
-import Image from '../Image/Image';
+import Image from '../Image';
 import FooterLinkSection from './FooterLinkSection';
 import '../../shared/styles/footer.css';
+import Headings from '../../shared/styles/StyleIndex'
 
 const footerLinks = {
   resources: [
@@ -53,7 +54,7 @@ export default function Footer() {
 
         {/* Newsletter */}
         <div className="footer-nav subtext">
-          <h4>Newsletter</h4>
+          <Headings as="h4" >Newsletter</Headings>
           <p>Subscribe to our newsletter system now<br /> to get latest news from us.</p>
           <form action="#" className='input_container'>
             <svg className='input_icon' viewBox="0 0 24 24" fill="none">

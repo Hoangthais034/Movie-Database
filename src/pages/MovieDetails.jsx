@@ -1,7 +1,8 @@
-import Image from "../components/Image/Image";
+import Image from "../components/Image";
 import { useLocation } from "react-router";
 import React, { useEffect, useState } from 'react';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
+import Headings from '../shared/styles/StyleIndex'
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState(null);
@@ -57,10 +58,10 @@ export default function MovieDetails() {
 
         <div className="w-full md:w-8/12">
             {/* Movie Title */}
-          <h2 className="movie-details__bd-hd h4">
+          <Headings as="h2" className="movie-details__bd-hd h4">
             {movie.title}
             <span className='movie-time-release ml-2'>({movie.year})</span>
-          </h2>
+          </Headings>
           
           {/* Action Buttons */}
           <div className="movie-details__social flex gap-4 my-4">

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { FetchingMovie } from '../../services/FetchingMovie';
 import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
-import Image from '../Image/Image';
+import Image from '../../components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import '../../shared/styles/slideshow.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router';
+import Headings from '../../shared/styles/StyleIndex'
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
@@ -113,10 +113,17 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
 
                 </div>
                 <div className='slideshow__movie-name'>
-                  <h2 className='h1 text-upper'>
+                <Headings as="h1">This is an H1</Headings>
+                <Headings as="h2">This is an H2</Headings>
+                <Headings as="h3">This is an H3</Headings>
+                <Headings className="h1">This is a styled H1 with class</Headings>
+                <Headings className="h2">This is a styled H2 with class</Headings>
+                <Headings className="h3">This is a styled H3 with class</Headings>
+
+                  <Headings as='h2' className='h1 text-upper'>
                     {movie.title}
                     <span className='movie-time-release'>{movie.release_date}</span>
-                  </h2>
+                  </Headings>
                 </div>
                 <div className='slideshow__movie-atc flex flex-wrap'>
                     <a href="#" className="social-btn">

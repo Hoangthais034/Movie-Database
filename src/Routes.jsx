@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import MainLayout from "./components/Layout/MainLayout";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import MovieDetails from "./pages/MovieDetails";
 import PageNotFound from "./pages/404Page";
 
