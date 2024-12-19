@@ -1,6 +1,6 @@
 import SlideShow from './SlideShow/SlideShow';
 import TabsSlider from '../../components/TabsSlider';
-import SlideTrailer from './SlideTrailer';
+import SectionTrailer from './SlideTrailer/SlideTrailer';
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
         <TabsSlider title="Anime" dataType="anime" dataObject="best,trending" dataInterval="week" totalItems="10" />
       </div>
       <div className='section page-width'>
-        <SlideTrailer title="In Theater" dataType="movies" dataObject="all" dataInterval="month" totalItems="5" />
+        <SectionTrailer title="In Theater" dataType="movies" dataObject="all" dataInterval="month" totalItems="5" />
       </div>
     </div>
   );

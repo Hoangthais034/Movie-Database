@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from '../../components/Image';
+import Image from '../../../components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { Navigation, Thumbs } from 'swiper/modules';
-import '../../shared/styles/slide-trailers.css';
+import { SlideTrailer, SlideButton, SlideTrailerThumbs, TrailerPopup } from './StyleSlideTrailers'
+import { FlexBox } from '../../../shared/styles/LayoutModels/LayoutModels';
 import { Link } from 'react-router';
 import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
-import Headings from '../../shared/styles/Typo'
-import fetchMoviesComing from '../../services/FetchMovieSoon'
-import FetchByID from '../../services/FetchByID'
+import Headings from '../../../shared/styles/Typo'
+import fetchMoviesComing from '../../../services/FetchMovieSoon'
+import FetchByID from '../../../services/FetchByID'
 
-export default function SlideTrailer({title}) {
+
+
+export default function SectionTrailer({title}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeMovie, setActiveMovie] = useState(null);
@@ -60,26 +63,26 @@ export default function SlideTrailer({title}) {
 
   if (loading) {
     return (
-      <div className="slide-trailer overflow-hidden relative">
+      <SlideTrailer className="overflow-hidden relative">
         <div className="loading-skeleton" style={{ aspectRatio: '16/9' }} />
-      </div>
+      </SlideTrailer>
     );
   }
 
   return (
-    <div className="slide-trailer">
-      <div className='section-heading flex justify-between items-center'>
+    <SlideTrailer>
+      <FlexBox justifyContent="space-between" alignItems="center" className='section-heading'>
           <div className='section__title'>
               <Headings as="h2" className='h3'>{title}</Headings>
           </div>
           <div className='section__btn btn'>
               <Link to="#">View All</Link>
           </div>
-      </div>
-      <div className="slide-trailer__flex">
-        <div className="slide-trailer__images">
+      </FlexBox>
+      <FlexBox alignItems="stretch" flexDirection={{ default: "column" ,md: "row" }}>
+        <FlexBox width={{ default: "100%" ,md: "65%" }}>
           {activeMovie && (
-            <div className="active-movie-container overflow-hidden">
+            <div className="active-movie-container">
               <Image
                 key={activeMovie.fanart}
                 src={`https://simkl.in/fanart/${activeMovie.fanart}_medium.webp`}
@@ -98,11 +101,11 @@ export default function SlideTrailer({title}) {
               </div>
             </div>
           )}
-        </div>
+        </FlexBox>
 
-        <div className="slide-trailer__col">
-          <div className="slide-trailer__prev"><RiArrowUpSLine size={32} color='#FFF'/></div>
-          <div className="slide-trailer__thumbs">
+        <FlexBox flexDirection="column" width={{ default: "100%" ,md: "35%" }} justifyContent="space-between" className="slide-trailer__col">
+          <SlideButton className="slide-trailer__prev"><RiArrowUpSLine size={32} color='#FFF'/></SlideButton>
+          <SlideTrailerThumbs>
             <Swiper
               direction="vertical"
               spaceBetween={20}
@@ -124,7 +127,7 @@ export default function SlideTrailer({title}) {
             >
               {movies.map((movie, index) => (
                 <SwiperSlide key={movie.id || index}>
-                  <div className="slide-trailer__image grid gap-4 overflow-hidden">
+                  <div className="slide-trailer__image">
                     <Image
                       src={`https://simkl.in/fanart/${movie.fanart}_medium.webp`}
                       alt={movie.title || `Thumbnail ${index + 1}`}
@@ -141,13 +144,13 @@ export default function SlideTrailer({title}) {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
-          <div className="slide-trailer__next"><RiArrowDownSLine size={32} color='#FFF'/></div>
-        </div>
-      </div>
+          </SlideTrailerThumbs>
+          <SlideButton className="slide-trailer__next"><RiArrowDownSLine size={32} color='#FFF'/></SlideButton>
+        </FlexBox>
+      </FlexBox>
 
       {showTrailer && trailerUrl && (
-        <div className="trailer-popup">
+        <TrailerPopup>
           <div className="trailer-popup-content">
             <button 
               className="close-trailer"
@@ -164,8 +167,8 @@ export default function SlideTrailer({title}) {
               allowFullScreen
             />
           </div>
-        </div>
+        </TrailerPopup>
       )}
-    </div>
+    </SlideTrailer>
   );
 }

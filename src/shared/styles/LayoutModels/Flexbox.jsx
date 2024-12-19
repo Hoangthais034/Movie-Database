@@ -128,20 +128,49 @@ FlexBox.propTypes = {
       ])
     ),
   ]),
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  display: PropTypes.oneOfType([PropTypes.oneOf(["flex", "inline-flex"]), PropTypes.string]),
-  flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  flexBasis: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  flexDirection: PropTypes.oneOfType([PropTypes.oneOf([
-    "column-reverse",
-    "column",
-    "row-reverse",
-    "row",
-  ]), PropTypes.string]),
-  flexGrow: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  flexShrink: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  flexWrap: PropTypes.oneOfType([PropTypes.oneOf(["nowrap", "wrap-reverse", "wrap"]), PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]),
+  display: PropTypes.oneOfType([
+    PropTypes.oneOf(["flex", "inline-flex"]),
+    PropTypes.string,
+  ]),
+  flex: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  flexBasis: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  flexDirection: PropTypes.oneOfType([
+    PropTypes.oneOf(["column-reverse", "column", "row-reverse", "row"]),
+    PropTypes.objectOf(
+      PropTypes.oneOf(["column-reverse", "column", "row-reverse", "row"])
+    ),
+  ]),
+  flexGrow: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  flexShrink: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  flexWrap: PropTypes.oneOfType([
+    PropTypes.oneOf(["nowrap", "wrap-reverse", "wrap"]),
+    PropTypes.string,
+  ]),
+  height: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
   inline: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   justifyContent: PropTypes.oneOfType([
     PropTypes.oneOf([
@@ -172,25 +201,88 @@ FlexBox.propTypes = {
     "nav",
     "ul",
     "li",
-    "section"
+    "section",
   ]),
-  margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  marginLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  marginRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  marginTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  margin: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  marginBottom: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  marginLeft: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  marginRight: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  marginTop: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  maxHeight: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  maxWidth: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  minHeight: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  minWidth: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
   order: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  paddingBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  paddingLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  paddingRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  paddingTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  padding: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  paddingBottom: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  paddingLeft: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  paddingRight: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  paddingTop: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
+  width: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
 };
 
 FlexBox.defaultProps = {
