@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { FlexBox } from "../../shared/styles/LayoutModels/Flexbox";
+import { FlexBox } from "../../../shared/styles/LayoutModels/LayoutModels";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

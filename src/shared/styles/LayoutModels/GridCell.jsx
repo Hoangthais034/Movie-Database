@@ -90,6 +90,8 @@ GridCell.propTypes = {
     "header",
     "main",
     "nav",
+    "ul",
+    "li",
     "section",
   ]),
   margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

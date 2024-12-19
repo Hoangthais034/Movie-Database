@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
-import Image from '../Image';
+import Image from '../../Image';
 import FooterLinkSection from './FooterLinkSection';
-import '../../shared/styles/footer.css';
-import Headings from '../../shared/styles/Typo'
+import Headings from '../../../shared/styles/Typo'
+import { FlexBox } from "../../../shared/styles/LayoutModels/LayoutModels";
 
 const footerLinks = {
   resources: [
@@ -25,12 +25,48 @@ const footerLinks = {
     { text: 'User Guide', url: '#' }
   ]
 };
+import styled from "styled-components";
 
+export const FooterWrap = styled.footer`
+  display: grid;
+  gap: 1.2rem;
+  background: url(/slider-bg2.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-block: 80px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  a,
+  .footer-nav p {
+    text-decoration: none;
+    font-size: 14px;
+    color: inherit;
+  }
+
+  .logo-image {
+    margin-bottom: 60px;
+    max-width: 120px;
+  }
+
+  .footer-content {
+    max-width: 210px;
+  }
+
+  .footer-content p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: var(--color-subtext);
+  }
+`
 
 export default function Footer() {
   return (
-    <footer className="footer grid page-width">
-      <div className="flex justify-between items-start">
+    <FooterWrap className="page-width">
+      <FlexBox justifyContent="space-between" alignItems="flex-start" flexWrap="wrap" gap="24px">
         {/* Company Info */}
         <div className="footer-content">
           <Link to="/">
@@ -65,14 +101,14 @@ export default function Footer() {
           </form>
           <Link to="#" className="btn reversed-link">Subscribe now</Link>
         </div>
-      </div>
+      </FlexBox>
 
       {/* Copyright */}
       <div className="footer-copyright">
-        <div className="ft-left">
+        <div>
           <p>© {new Date().getFullYear()} Blockbuster. All Rights Reserved.</p>
         </div>
       </div>
-    </footer>
+    </FooterWrap>
   );
 } 

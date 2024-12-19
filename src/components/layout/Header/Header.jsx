@@ -1,7 +1,7 @@
-import Image from "../Image";
+import Image from "../../Image";
 import Navigation from "./HeaderNavigation";
 import { Link } from "react-router";
-import { FlexBox } from "../../shared/styles/LayoutModels/Flexbox";
+import { FlexBox } from "../../../shared/styles/LayoutModels/LayoutModels";
 import { HeaderWrap } from "./StyleHeader";
 
 export default function Header() {
