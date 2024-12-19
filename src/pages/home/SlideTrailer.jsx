@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import axios from "axios";
 import Image from '../../components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -8,32 +7,10 @@ import 'swiper/css/thumbs';
 import { Navigation, Thumbs } from 'swiper/modules';
 import '../../shared/styles/slide-trailers.css';
 import { Link } from 'react-router';
-import movieTrailer from 'movie-trailer';
 import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
 import Headings from '../../shared/styles/Typo'
-
-const API_URL = "https://api.simkl.com/movies/genres/action/this-year/revenue/";
-const API_KEY = import.meta.env.VITE_SIMKL_CLIENT_ID;
-const fetchTrendingMovies = async (totalMovies = 5) => {
-  try {
-    const response = await axios.get(API_URL, {
-      params: {
-        extended: "title,genres,tmdb",
-        langs: 'en',
-        client_id: API_KEY,
-      },
-    });
-
-    if (response.data) {
-      console.log(response.data)
-      return response.data.slice(0, totalMovies);
-    }
-    return [];
-  } catch (error) {
-    console.error("Error fetching trending movies:", error);
-    throw error;
-  }
-};
+import fetchMoviesComing from '../../services/FetchMovieSoon'
+import FetchByID from '../../services/FetchByID'
 
 export default function SlideTrailer({title}) {
   const [movies, setMovies] = useState([]);
@@ -45,7 +22,7 @@ export default function SlideTrailer({title}) {
   useEffect(() => {
     const getTrendingMovies = async () => {
       try {
-        const data = await fetchTrendingMovies(5);
+        const data = await fetchMoviesComing(5);
         setMovies(data);
         setActiveMovie(data[0]);
       } finally {
@@ -64,8 +41,12 @@ export default function SlideTrailer({title}) {
   const handleTrailerClick = async () => {
     try {
       if (!activeMovie) return;
-      
-      const trailerResult = await movieTrailer(activeMovie.title);
+
+      const movieData = await FetchByID(activeMovie.ids.simkl_id);
+      console.log(activeMovie)
+      const youtubeId = movieData.trailers[0].youtube;
+
+      const trailerResult = `https://www.youtube.com/embed/${youtubeId}`;
       if (trailerResult) {
         setTrailerUrl(trailerResult);
         setShowTrailer(true);
@@ -110,7 +91,7 @@ export default function SlideTrailer({title}) {
               />
               <div className="active-movie-info">
                 <Headings as="h3">{activeMovie.title}</Headings>
-                <p>{new Date(activeMovie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                <p>{new Date(activeMovie.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 <button className="watch-trailer-btn" onClick={handleTrailerClick}>
                   Watch Trailer
                 </button>
@@ -145,7 +126,7 @@ export default function SlideTrailer({title}) {
                 <SwiperSlide key={movie.id || index}>
                   <div className="slide-trailer__image grid gap-4 overflow-hidden">
                     <Image
-                      src={`https://simkl.in/posters/${movie.poster}_w.webp`}
+                      src={`https://simkl.in/fanart/${movie.fanart}_medium.webp`}
                       alt={movie.title || `Thumbnail ${index + 1}`}
                       className="image--wrapper shrink-0"
                       loading="lazy"
@@ -154,7 +135,7 @@ export default function SlideTrailer({title}) {
                     />
                     <div className='slide-trailer__image-content'>
                       <p className='trailer--title m-0 font-heading'>{movie.title}</p>
-                      <p className='trailer--release m-0 subtext'>{new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                      <p className='trailer--release m-0 subtext'>{new Date(movie.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     </div>
                   </div>
                 </SwiperSlide>
@@ -177,7 +158,7 @@ export default function SlideTrailer({title}) {
             <iframe
               width="100%"
               height="100%"
-              src={trailerUrl.replace('watch?v=', 'embed/')}
+              src={trailerUrl}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

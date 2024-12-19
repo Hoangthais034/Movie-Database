@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FetchingMovie } from '../../../services/FetchingMovie';
+import { FetchingMovie } from '../../../services/FetchMovie';
 import { Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
 import Image from '../../../components/Image';

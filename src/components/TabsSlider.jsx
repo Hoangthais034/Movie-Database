@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { FetchingMovie } from '../services/FetchingMovie';
+import { FetchingMovie } from '../services/FetchMovie';
 import Image from './Image';
 import { RiStarFill } from "@remixicon/react";
 import { Navigation, Pagination } from 'swiper/modules';

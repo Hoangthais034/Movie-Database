@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import React, { useEffect, useState } from 'react';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
 import Headings from '../shared/styles/Typo'
-import { FetchingByID } from '../services/FetchingByID';
+import FetchByID  from '../services/FetchByID';
 import TabsSlider from '../components/TabsSlider';
 
 
@@ -31,7 +31,7 @@ export default function MovieDetails() {
   
   const movieDetails = async (id) => {
     try {
-      const data = await FetchingByID(id);
+      const data = await FetchByID(id);
       setMovie(data);
       console.log(data)
 

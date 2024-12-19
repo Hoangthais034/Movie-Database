@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "https://api.simkl.com/movies/";
 const API_KEY = import.meta.env.VITE_SIMKL_CLIENT_ID;
 
-export const FetchingByID = async (id) => {
+const FetchByID = async (id) => {
   try {
     const url = `${API_URL}${id}`;
     const response = await axios.get(url, {
@@ -21,3 +21,5 @@ export const FetchingByID = async (id) => {
     throw error;
   }
 };
+
+export default FetchByID;
