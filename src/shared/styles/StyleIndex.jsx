@@ -131,9 +131,29 @@ const GlobalStyle = createGlobalStyle`
     -moz-border-radius: 20px;
     border-radius: 20px;
     text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
   }
 
+  .button.sm-radius{
+    border-radius: 5px;
+    height: 45px;
+  }
+
+  .button.btn-primary{
+    background-color: #dd003f;
+    color: #ffffff;
+  }
+
+  .button.btn-secondary{
+    color: #020d18;
+
+    background-color: #dcf836;
+  }
   /* Image Style */
   .image--wrapper {
     position: relative;

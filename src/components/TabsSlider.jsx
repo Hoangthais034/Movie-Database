@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { FetchingMovie } from '../../services/FetchingMovie';
-import Image from '../../components/Image';
+import { FetchingMovie } from '../services/FetchingMovie';
+import Image from './Image';
 import { RiStarFill } from "@remixicon/react";
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import '../../shared/styles/tabslider.css';
+import '../shared/styles/tabslider.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Headings from '../../shared/styles/Typo'
+import Headings from '../shared/styles/Typo'
 
 let tabCounter = 0;
 
