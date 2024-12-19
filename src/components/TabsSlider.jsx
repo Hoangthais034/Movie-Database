@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { FetchingMovie } from '../services/FetchMovie';
-import Image from './Image';
 import { RiStarFill } from "@remixicon/react";
-import { Navigation, Pagination } from 'swiper/modules';
+import styled from "styled-components";
+
+import '../shared/styles/tabslider.css';
+import { FetchingMovie } from '../services/FetchMovie';
+import Headings from '../shared/styles/Typo'
+import Image from './Image';
+import { FlexBox } from '../shared/styles/LayoutModels/LayoutModels';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
-import '../shared/styles/tabslider.css';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Headings from '../shared/styles/Typo'
+
+
+const  Checkdiv = styled(FlexBox)`
+  background: red;
+`
 
 let tabCounter = 0;
 
@@ -42,48 +51,21 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
     if (loading){
       return (
         <>
-            <div className='section-heading flex justify-between items-center'>
-                <div className='section__title'>
-                    <Headings as="h2" className='h3'></Headings>
-                </div>
-                <div className='section__btn btn'>
-                    <Link to="#">View All</Link>
-                </div>
-            </div>
-            <div className="tab-slider-container grid gap-5 section-placeholder">
-                <div className='tab-slider__control flex justify-between items-center flex-wrap'>
-                    <ul className='tab-links flex'>
-                        <li className='active relative overflow-hidden'>
-                            <a href="#">
 
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div className='tab-slider_holder'>
-                {[...Array(6)].map((_, index) => (
-                    <div className="tab-slider__wrapper hover-scale flex relative" key={index}>
-                        <div className="tab-slider__image hover-scale-up w-full relative overflow-hidden">
-                          <div className="loading-skeleton" />
-                        </div>
-                    </div>
-                ))}
-                </div>
-            </div>
         </>
       )
     }
 
     return (
         <>
-            <div className='section-heading flex justify-between items-center'>
+            <Checkdiv justifyContent="space-between" alignItems="center" className='section-heading'>
                 <div className='section__title'>
                     <Headings as="h2" className='h3'>{title}</Headings>
                 </div>
                 <div className='section__btn btn'>
                     <Link to="#">View All</Link>
                 </div>
-            </div>
+            </Checkdiv>
             <div className="tab-slider-container grid gap-5">
                 <div className='tab-slider__control flex justify-between items-center flex-wrap'>
                     <ul className={`tab-links flex tab-links-${sliderId}`}>
@@ -138,9 +120,9 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                                             />
                                         </div>
                                         <div className="tab-slider__meta">
-                                            <p className="movie-title m-0">
+                                            <a className="movie-title m-0" href={`/movie-details/${movie.ids.simkl_id}`}>
                                                 {movie.title}
-                                            </p>
+                                            </a>
                                             <p className='movie-ratings m-0'>
                                               
                                                 <RiStarFill size={16} color='#f5b50a' /> <span className='rating-score'>{movie.ratings.simkl.rating}</span> /10
