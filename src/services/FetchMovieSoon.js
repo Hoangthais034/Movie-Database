@@ -13,7 +13,6 @@ const fetchMoviesComing = async (totalMovies = 5) => {
     });
 
     if (response.data) {
-      console.log(response.data)
       return response.data.slice(0, totalMovies);
     }
     return [];

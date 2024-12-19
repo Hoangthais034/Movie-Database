@@ -62,8 +62,8 @@ export const SlideTrailerThumbs = styled.div`
 
   @media (max-width: 767.98px) {
     height: 100px;
-    width: calc(100% - 96px);
-    margin: 0 16px;
+    width: 100%;
+    padding: 0 16px;
   }
 
   .slide-trailer__image {

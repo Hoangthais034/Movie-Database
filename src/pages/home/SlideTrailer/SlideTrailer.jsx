@@ -46,7 +46,6 @@ export default function SectionTrailer({title}) {
       if (!activeMovie) return;
 
       const movieData = await FetchByID(activeMovie.ids.simkl_id);
-      console.log(activeMovie)
       const youtubeId = movieData.trailers[0].youtube;
 
       const trailerResult = `https://www.youtube.com/embed/${youtubeId}`;
@@ -103,7 +102,7 @@ export default function SectionTrailer({title}) {
           )}
         </FlexBox>
 
-        <FlexBox flexDirection="column" width={{ default: "100%" ,md: "35%" }} justifyContent="space-between" className="slide-trailer__col">
+        <FlexBox flexDirection="column" width={{ default: "100%" ,md: "35%" }} justifyContent="space-between" className="slide-trailer__col" alignItems="center">
           <SlideButton className="slide-trailer__prev"><RiArrowUpSLine size={32} color='#FFF'/></SlideButton>
           <SlideTrailerThumbs>
             <Swiper

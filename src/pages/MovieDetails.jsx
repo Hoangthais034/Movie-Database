@@ -33,7 +33,6 @@ export default function MovieDetails() {
     try {
       const data = await FetchByID(id);
       setMovie(data);
-      console.log(data)
 
     } finally {
       setLoading(false);  
