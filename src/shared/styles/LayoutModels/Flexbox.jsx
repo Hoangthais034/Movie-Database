@@ -38,6 +38,7 @@ export const FlexBox = styled(
     paddingRight,
     paddingTop,
     width,
+    gap,
     ...props
   }) => React.createElement(element, props, children)
 )`
@@ -69,6 +70,8 @@ export const FlexBox = styled(
   ${(props) => applyStyle("padding-right", props.paddingRight)}
   ${(props) => applyStyle("padding-top", props.paddingTop)}
   ${(props) => applyStyle("width", props.width)}
+  ${(props) => applyStyle("gap", props.gap)}
+
 `;
 
 FlexBox.propTypes = {
@@ -279,6 +282,11 @@ FlexBox.propTypes = {
     PropTypes.arrayOf(PropTypes.object),
   ]),
   width: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+  gap: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.object,
