@@ -8,7 +8,8 @@ import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router';
 import Headings from '../../../shared/styles/Typo';
-import { SectionSlideshow, SwiperButton, SlideshowImage, SlideshowContents, MovieATC, MovieInfor } from './StylesSlideshow';
+import { SectionSlideshow, SwiperButton, SlideshowImage, MovieName, MovieInfor } from './StylesSlideshow';
+import { FlexBox } from "../../../shared/styles/LayoutModels/LayoutModels";
 
 export default function SlideShow({ dataType, dataObject, dataInterval, totalItems }) {
   const [movies, setMovies] = useState([]);
@@ -54,44 +55,42 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
         {movies.map((movie, index) => (
           <SwiperSlide key={index}>
             <div className='slideshow__wrapper flex'>
-              <SlideshowContents className='md:w-8/12 w-full'>
-                <div className='slideshow__movie-tags movie-tags flex gap-2'>
+              <FlexBox flexDirection="column" alignItems="flex-start" padding='0 16px'>
+                <div className='movie-tags flex gap-2'>
                   {movie.genres.map((genres, index) => (
                     <span className='tag' data-tag={index} key={index}>{genres}</span>
                   ))}
                 </div>
-                <div className='slideshow__movie-name'>
+                <MovieName>
                   <Headings as='h2' className='h1 text-upper'>
                     {movie.title}
                     <span className='movie-time-release'>{movie.release_date}</span>
                   </Headings>
-                </div>
-                <MovieATC className='flex flex-wrap'>
+                </MovieName>
+                <FlexBox flexWrap="wrap" marginBottom="15px" >
                   <a href="#" className="social-btn">
                     <div className='icon'><RiPlayFill size={16} /> </div>Watch Trailer
                   </a>
                   <a href="#" className="social-btn">
                     <div className='icon'><RiHeartFill size={16} /> </div>Add to Favorite
                   </a>
-                </MovieATC>
-                <div className='slideshow__movie-meta flex items-end flex-wrap'>
-                  <MovieInfor className="m-0 flex items-end flex-wrap">
-                    <li className='relative'>  <RiStarFill size={16} color='#f5b50a' /><span className='rating-score'>{movie.ratings.simkl.rating}</span> /10 </li>
-                    <li className='relative'>  Run Time: {movie.runtime} </li>
-                    <li className='relative'>  Release: {new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</li>
+                </FlexBox>
+                <FlexBox alignItems="flex-end" flexWrap="wrap" marginBottom="24px">
+                  <MovieInfor>
+                    <FlexBox alignItems="flex-end" element="li" className='relative'>  <RiStarFill size={16} color='#f5b50a' /><span className='rating-score'>{movie.ratings.simkl.rating}</span> /10 </FlexBox>
+                    <FlexBox alignItems="flex-end" element="li" className='relative'>  Run Time: {movie.runtime} </FlexBox>
+                    <FlexBox alignItems="flex-end" element="li" className='relative'>  Release: {new Date(movie.release_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</FlexBox>
                   </MovieInfor>
-                </div>
-                <div className='slideshow__movie-button'>
-                  <button 
-                    className="button flex" 
-                    onClick={() => handleViewDetails(movie)}
-                  >
-                    View Details
-                  </button>
-                </div>
-              </SlideshowContents>
+                </FlexBox>
+                <button 
+                  className="button flex" 
+                  onClick={() => handleViewDetails(movie)}
+                >
+                  View Details
+                </button>
+              </FlexBox>
 
-              <SlideshowImage className='w-4/12 hidden md:block'>
+              <SlideshowImage>
                 <Image
                   src={`https://simkl.in/posters/${movie.poster}_m.webp`}
                   alt="Movie poster"

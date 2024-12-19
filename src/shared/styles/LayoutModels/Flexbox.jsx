@@ -170,7 +170,9 @@ FlexBox.propTypes = {
     "header",
     "main",
     "nav",
-    "section",
+    "ul",
+    "li",
+    "section"
   ]),
   margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),

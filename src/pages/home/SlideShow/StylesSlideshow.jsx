@@ -17,7 +17,13 @@ export const SwiperButton = styled.div`
 
 export const SlideshowImage = styled.div`
   padding: 0 16px;
+  width: 33.3333333333%;
+  display: block;
 
+  @media (max-width: 1023.98px) {
+    display: none;
+  }
+    
   .image--wrapper {
     max-width: 27rem;
     margin-inline: auto 0;
@@ -28,15 +34,7 @@ export const SlideshowImage = styled.div`
   }
 `;
 
-export const SlideshowContents = styled.div`
-  padding: 0 16px;
-  display: flex;
-  justify-items: start;
-  text-align: left;
-  flex-direction: column;
-  align-items: flex-start;
-
-  .slideshow__movie-name {
+export const MovieName = styled.div`
     margin-bottom: 15px;
 
     .movie-time-release {
@@ -46,21 +44,15 @@ export const SlideshowContents = styled.div`
       text-transform: uppercase;
       margin-left: 12px;
     }
-  }
-
-  .slideshow__movie-meta {
-    margin-bottom: 24px;
-  }
-`;
-
-export const MovieATC = styled.div`
-  margin-bottom: 15px;
 `;
 
 export const MovieInfor = styled.ul`
   list-style: none;
   padding-left: 0;
   gap: 1.2rem 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
 
   li {
     color: var(--color-subtext);
