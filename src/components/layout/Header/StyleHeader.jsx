@@ -1,7 +1,8 @@
 /* Header */
 import styled from "styled-components";
+import { FlexBox } from "../../../shared/styles/LayoutModels/LayoutModels";
 
-export const HeaderWrap = styled.header`
+export const HeaderWrap = styled(FlexBox)`
     background-color: var(--color-background);
     padding: 2.4rem;
     position: sticky;
