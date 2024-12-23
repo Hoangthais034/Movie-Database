@@ -5,6 +5,7 @@ import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
 import Image from '../../../components/Image';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router';
 import Headings from '../../../shared/styles/Typo';
@@ -92,7 +93,7 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
 
               <SlideshowImage>
                 <Image
-                  src={`https://simkl.in/posters/${movie.poster}_m.webp`}
+                  src={`https://wsrv.nl/?url=https://simkl.in/posters/${movie.poster}_m.webp`}
                   alt="Movie poster"
                   className="image--wrapper shrink-0"
                   loading={index === 0 ? "eager" : "lazy"}

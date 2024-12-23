@@ -1,5 +1,5 @@
 import SlideShow from './SlideShow/SlideShow';
-import TabsSlider from '../../components/TabsSlider';
+import TabsSlider from '../../components/TabsSlider/TabsSlider';
 import SectionTrailer from './SlideTrailer/SlideTrailer';
 
 export default function Home() {

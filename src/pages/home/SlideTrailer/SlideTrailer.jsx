@@ -84,7 +84,7 @@ export default function SectionTrailer({title}) {
             <div className="active-movie-container">
               <Image
                 key={activeMovie.fanart}
-                src={`https://simkl.in/fanart/${activeMovie.fanart}_medium.webp`}
+                src={`https://wsrv.nl/?url=https://simkl.in/fanart/${activeMovie.fanart}_medium.webp`}
                 alt={activeMovie.title}
                 className="active-movie-image cursor-pointer"
                 loading="lazy"
@@ -128,7 +128,7 @@ export default function SectionTrailer({title}) {
                 <SwiperSlide key={movie.id || index}>
                   <div className="slide-trailer__image">
                     <Image
-                      src={`https://simkl.in/fanart/${movie.fanart}_medium.webp`}
+                      src={`https://wsrv.nl/?url=https://simkl.in/fanart/${movie.fanart}_medium.webp`}
                       alt={movie.title || `Thumbnail ${index + 1}`}
                       className="image--wrapper shrink-0"
                       loading="lazy"

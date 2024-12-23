@@ -17,7 +17,7 @@ export const HeaderWrap = styled(FlexBox)`
       list-style: none;
     }
 
-    a {
+    a.reversed-link {
       color: white;
       text-decoration: none;
       padding: 0;

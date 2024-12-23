@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
 import Headings from '../shared/styles/Typo'
 import FetchByID  from '../services/FetchByID';
-import TabsSlider from '../components/TabsSlider';
+import TabsSlider from '../components/TabsSlider/TabsSlider';
 
 
 import styled from 'styled-components';
@@ -55,7 +55,7 @@ export default function MovieDetails() {
           <div className="w-full md:w-4/12">
             <SectionSticky className="movie-details__sticky">
               <Image
-                src={`https://simkl.in/posters/${movie.poster}_m.webp`}
+                src={`https://wsrv.nl/?url=https://simkl.in/posters/${movie.poster}_m.webp`}
                 alt={`${movie.title} poster`}
                 className="image--wrapper shrink-0 rounded-lg shadow-lg"
                 loading="eager"
