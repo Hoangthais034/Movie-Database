@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SlideTrailer = styled.div`
+export const BlockTrailer = styled.div`
   .slide-trailer__col {
     background-color: var(--color-background);
   }

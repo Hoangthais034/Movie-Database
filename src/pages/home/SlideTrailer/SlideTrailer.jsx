@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { Navigation, Thumbs } from 'swiper/modules';
-import { SlideTrailer, SlideButton, SlideTrailerThumbs, TrailerPopup } from './StyleSlideTrailers'
+import { BlockTrailer, SlideButton, SlideTrailerThumbs, TrailerPopup } from './StyleSlideTrailers'
 import { FlexBox } from '../../../shared/styles/LayoutModels/LayoutModels';
 import { Link } from 'react-router';
 import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
@@ -62,14 +62,14 @@ export default function SectionTrailer({title}) {
 
   if (loading) {
     return (
-      <SlideTrailer className="overflow-hidden relative">
+      <BlockTrailer className="overflow-hidden relative">
         <div className="loading-skeleton" style={{ aspectRatio: '16/9' }} />
-      </SlideTrailer>
+      </BlockTrailer>
     );
   }
 
   return (
-    <SlideTrailer>
+    <BlockTrailer>
       <FlexBox justifyContent="space-between" alignItems="center" className='section-heading'>
           <div className='section__title'>
               <Headings as="h2" className='h3'>{title}</Headings>
@@ -168,6 +168,6 @@ export default function SectionTrailer({title}) {
           </div>
         </TrailerPopup>
       )}
-    </SlideTrailer>
+    </BlockTrailer>
   );
 }

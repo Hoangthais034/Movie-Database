@@ -8,10 +8,12 @@ export const SectionSlideshow = styled.div`
 `;
 
 export const SwiperButton = styled.div`
-  display: block;
+  &.swiper-button{
+    display: block;
 
-  @media (max-width: 1023.98px) {
-    display: none;
+    @media (max-width: 1023.98px) {
+      display: none;
+    }
   }
 `;
 
