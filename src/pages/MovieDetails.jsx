@@ -1,14 +1,14 @@
 import Image from "../components/Image";
 import { useParams } from "react-router";
 import React, { useEffect, useState } from 'react';
-import { RiHeartFill, RiPlayFill, RiStarFill } from "@remixicon/react";
+import { RiHeartFill, RiStarFill, RiStarLine, RiStarHalfLine } from "@remixicon/react";
 import Headings from '../shared/styles/Typo'
 import FetchByID  from '../services/FetchByID';
 import TabsSlider from '../components/TabsSlider/TabsSlider';
 import { FlexBox } from '../shared/styles/LayoutModels/LayoutModels';
 import styled from 'styled-components';
-import { BlockTrailer, TrailerPopup } from '../pages/home/SlideTrailer/StyleSlideTrailers'
-
+import { BlockTrailer } from '../pages/home/SlideTrailer/StyleSlideTrailers'
+import TrailerModal from '../components/TrailerModal';
 
 
 export const MovieName = styled(Headings)`
@@ -92,8 +92,6 @@ export default function MovieDetails() {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const [trailerUrl, setTrailerUrl] = useState(null);
-  const [showTrailer, setShowTrailer] = useState(false);
 
   const movieDetails = async (id) => {
     try {
@@ -109,26 +107,6 @@ export default function MovieDetails() {
   useEffect(() => {
     movieDetails(id);
   }, []);
-
-  const handleTrailerClick = async () => {
-    try {
-      if (!movie) return;
-      
-      const movieData = await FetchByID(movie.ids.simkl);
-      const youtubeId = movieData.trailers[0].youtube;
-      console.log(movieData, youtubeId)
-
-      const trailerResult = `https://www.youtube.com/embed/${youtubeId}`;
-      if (trailerResult) {
-        setTrailerUrl(trailerResult);
-        setShowTrailer(true);
-      } else {
-        console.log('No trailer found');
-      }
-    } catch (error) {
-      console.error('Error fetching trailer:', error);
-    }
-  };
 
   if (loading) return <div className="loading-spinner">Loading...</div>;
   if (!movie) return <div className="error-message">Movie not found</div>;
@@ -170,9 +148,10 @@ export default function MovieDetails() {
             
             {/* Action Buttons */}
             <FlexBox gap="2rem">
-              <a href="#" className="social-btn" onClick={handleTrailerClick}>
-                <div className='icon'><RiPlayFill size={16} /> </div>Watch Trailer
-              </a>
+              <TrailerModal element="a" movieId={movie.ids.simkl} fetchTrailer={async (id) => {
+                const movieData = await FetchByID(id);
+                return movieData.trailers[0].youtube;
+              }} />
               <a href="#" className="social-btn">
                 <div className='icon'><RiHeartFill size={16} /> </div>Add to Favorite
               </a>
@@ -183,23 +162,28 @@ export default function MovieDetails() {
               <FlexBox className="rate-star" alignItems="center" gap="1.5rem">
                 <RiStarFill size={32} color='#f5b50a' />
                   <FlexBox flexDirection="column" gap=".8rem">
-                    <p>8.1 <span className="total"> /10</span></p>
-                    <span className="rv">56 Reviews</span>
+                    <p>{movie.ratings.simkl.rating} <span className="total"> /10</span></p>
+                    <span className="rv">{movie.ratings.simkl.votes} Votes</span>
                   </FlexBox>
               </FlexBox>
               <FlexBox className="rate-stars" alignItems="center" gap="1rem">
                   <p>Rate This Movie:  </p>
-                  <RiStarFill size={24} color='#f5b50a' />
-                  <RiStarFill size={24} color='#f5b50a' />
-                  <RiStarFill size={24} color='#f5b50a' />
-                  <RiStarFill size={24} color='#f5b50a' />
-                  <RiStarFill size={24} color='#f5b50a' />
+                  {Array.from({ length: 10 }, (_, index) => {
+                    const starValue = index + 1;
+                    if (starValue <= Math.floor(movie.ratings.simkl.rating)) {
+                      return <RiStarFill key={index} size={24} color='#f5b50a' />;
+                    } else if (starValue === Math.ceil(movie.ratings.simkl.rating) && movie.ratings.simkl.rating % 1 !== 0) {
+                      return <RiStarHalfLine key={index} size={24} color='#f5b50a' />;
+                    } else {
+                      return <RiStarLine key={index} size={24} color='#f5b50a' />;
+                    }
+                  })}
               </FlexBox>
             </Ratting>
 
             {/* Overview */}
             
-            <FlexBox gap="2.4rem">
+            <FlexBox gap="2.4rem" flexDirection={{ default: "column", md: "row" }}>
               <FlexBox width={{ default: "100%", md: "75%" }} flexDirection="column" gap="2.4rem">
                 <div className="rte">
                   {movie.overview}
@@ -218,9 +202,10 @@ export default function MovieDetails() {
                     <div className="active-movie-info">
                       <Headings as="h3">{movie.title}</Headings>
                       <p>{new Date(movie.released).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                      <button className="watch-trailer-btn" onClick={handleTrailerClick}>
-                        Watch Trailer
-                      </button>
+                      <TrailerModal movieId={movie.ids.simkl} fetchTrailer={async (id) => {
+                        const movieData = await FetchByID(id);
+                        return movieData.trailers[0].youtube;
+                      }} />
                     </div>
                   </div>
                 </BlockTrailer>
@@ -259,27 +244,8 @@ export default function MovieDetails() {
       <div className="section movie-recommend page-width">
         <TabsSlider title="In Theater" dataType="movies" dataObject="trending" dataInterval="week" totalItems="10" />
       </div>
-      {showTrailer && trailerUrl && (
-        <TrailerPopup>
-          <div className="trailer-popup-content">
-            <button 
-              className="close-trailer"
-              onClick={() => setShowTrailer(false)}
-            >
-              ×
-            </button>
-            <iframe
-              width="100%"
-              height="100%"
-              src={trailerUrl}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </TrailerPopup>
-      )}
     </>
   );
   
 }
+

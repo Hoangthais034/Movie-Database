@@ -5,13 +5,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { Navigation, Thumbs } from 'swiper/modules';
-import { BlockTrailer, SlideButton, SlideTrailerThumbs, TrailerPopup } from './StyleSlideTrailers'
+import { BlockTrailer, SlideButton, SlideTrailerThumbs } from './StyleSlideTrailers'
 import { FlexBox } from '../../../shared/styles/LayoutModels/LayoutModels';
 import { Link } from 'react-router';
 import { RiArrowDownSLine, RiArrowUpSLine } from "@remixicon/react";
 import Headings from '../../../shared/styles/Typo'
 import fetchMoviesComing from '../../../services/FetchMovieSoon'
 import FetchByID from '../../../services/FetchByID'
+import TrailerModal from '../../../components/TrailerModal';
 
 
 
@@ -19,8 +20,6 @@ export default function SectionTrailer({title}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeMovie, setActiveMovie] = useState(null);
-  const [trailerUrl, setTrailerUrl] = useState(null);
-  const [showTrailer, setShowTrailer] = useState(false);
 
   useEffect(() => {
     const getTrendingMovies = async () => {
@@ -39,25 +38,6 @@ export default function SectionTrailer({title}) {
   const handleSlideChange = (swiper) => {
     const currentMovie = movies[swiper.realIndex];
     setActiveMovie(currentMovie);
-  };
-
-  const handleTrailerClick = async () => {
-    try {
-      if (!activeMovie) return;
-
-      const movieData = await FetchByID(activeMovie.ids.simkl_id);
-      const youtubeId = movieData.trailers[0].youtube;
-
-      const trailerResult = `https://www.youtube.com/embed/${youtubeId}`;
-      if (trailerResult) {
-        setTrailerUrl(trailerResult);
-        setShowTrailer(true);
-      } else {
-        console.log('No trailer found');
-      }
-    } catch (error) {
-      console.error('Error fetching trailer:', error);
-    }
   };
 
   if (loading) {
@@ -94,9 +74,10 @@ export default function SectionTrailer({title}) {
               <div className="active-movie-info">
                 <Headings as="h3">{activeMovie.title}</Headings>
                 <p>{new Date(activeMovie.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                <button className="watch-trailer-btn" onClick={handleTrailerClick}>
-                  Watch Trailer
-                </button>
+                <TrailerModal movieId={activeMovie.ids.simkl_id} fetchTrailer={async (id) => {
+                  const movieData = await FetchByID(id);
+                  return movieData.trailers[0].youtube;
+                }} />
               </div>
             </div>
           )}
@@ -147,27 +128,6 @@ export default function SectionTrailer({title}) {
           <SlideButton className="slide-trailer__next"><RiArrowDownSLine size={32} color='#FFF'/></SlideButton>
         </FlexBox>
       </FlexBox>
-
-      {showTrailer && trailerUrl && (
-        <TrailerPopup>
-          <div className="trailer-popup-content">
-            <button 
-              className="close-trailer"
-              onClick={() => setShowTrailer(false)}
-            >
-              ×
-            </button>
-            <iframe
-              width="100%"
-              height="100%"
-              src={trailerUrl}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </TrailerPopup>
-      )}
     </BlockTrailer>
   );
 }

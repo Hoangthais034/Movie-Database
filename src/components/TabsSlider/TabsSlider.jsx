@@ -123,7 +123,6 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                                                 {movie.title}
                                             </a>
                                             <p className='movie-ratings m-0'>
-                                              
                                                 <RiStarFill size={16} color='#f5b50a' /> <span className='rating-score'>{movie.ratings.simkl.rating}</span> /10
                                             </p>
                                         </div>
