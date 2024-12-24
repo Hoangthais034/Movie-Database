@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexBox } from '../../../shared/styles/LayoutModels/Flexbox';
 
 export const SectionSlideshow = styled.div`
   background-image: url(/slider-bg2.jpg);
@@ -17,9 +18,8 @@ export const SwiperButton = styled.div`
   }
 `;
 
-export const SlideshowImage = styled.div`
+export const SlideshowImage = styled(FlexBox)`
   padding: 0 16px;
-  width: 33.3333333333%;
   display: block;
 
   @media (max-width: 1023.98px) {
@@ -37,6 +37,7 @@ export const SlideshowImage = styled.div`
 `;
 
 export const MovieName = styled.div`
+    width: 100%;
     margin-bottom: 15px;
 
     .movie-time-release {

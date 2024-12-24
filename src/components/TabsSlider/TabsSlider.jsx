@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { RiStarFill } from "@remixicon/react";
+import Skeleton from '../../shared/styles/Skeleton';
 
 
 import './tabslider.jsx';
@@ -28,13 +29,11 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
 
     const fetchMovies = async (type, objects, interval, limit) => {
       try {
-        const objectArray = objects.split(',');
-        const allMovies = {};
-        for (const object of objectArray) {
-            const data = await FetchingMovie(type, object.trim(), interval, limit);
-            allMovies[object.trim()] = data;
-        }
-        setMoviesByTab(allMovies);
+        const objectArray = objects.split(',').map(obj => obj.trim());
+        const allMovies = await Promise.all(objectArray.map(object => 
+            FetchingMovie(type, object, interval, limit).then(data => ({ [object]: data }))
+        ));
+        setMoviesByTab(Object.assign({}, ...allMovies));
       } finally {
         setLoading(false);
       }
@@ -46,14 +45,6 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
 
     const [activeTab, setActiveTab] = useState(1);
     const [sliderId] = useState(() => `tab-slider-${++tabCounter}`);
-
-
-    if (loading){
-      return (
-        <>
-        </>
-      )
-    }
 
     return (
         <>
@@ -105,25 +96,35 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                             }}
                             data-tab={`tab${index + 1}`}
                         >
-                            {moviesByTab[dataObject.split(',')[index].trim()]?.map((movie, slideIndex) => (
+                            {(moviesByTab[dataObject.split(',')[index].trim()] || 
+                                Array(6).fill({ title: true })
+                            ).map((movie, slideIndex) => (
                                 <SwiperSlide key={slideIndex}>
                                     <SlideWrapper className="hover-scale relative">
                                         <div className="tab-slider__image hover-scale-up w-full overflow-hidden">
+                                          {loading ? (
+                                            <Skeleton className="skeleton-image-posters" />
+                                          ) : (
                                             <Image
-                                                src={`https://wsrv.nl/?url=https://simkl.in/posters/${movie.poster}_m.webp`}
-                                                alt={`Movie poster ${slideIndex + 1}`}
-                                                className="image--wrapper shrink-0"
-                                                loading="lazy"
-                                                fallback="/src/assets/react.svg"
-                                                aspectRatio="3/4"
+                                              src={`https://wsrv.nl/?url=https://simkl.in/posters/${movie.poster}_m.webp`}
+                                              alt={`Movie poster ${slideIndex + 1}`}
+                                              className="image--wrapper shrink-0"
+                                              loading="lazy"
+                                              fallback="/src/assets/react.svg"
+                                              aspectRatio="3/4"
                                             />
+                                          )}
                                         </div>
                                         <div className="tab-slider__meta">
-                                            <a className="movie-title m-0" href={`/movie-details/${movie.ids.simkl_id}`}>
-                                                {movie.title}
-                                            </a>
+                                            {!loading && (
+                                              <a className="movie-title m-0" href={`/movie-details/${movie.ids.simkl_id}`}>
+                                                  <>{movie.title}</>
+                                              </a>
+                                            )}
                                             <p className='movie-ratings m-0'>
-                                                <RiStarFill size={16} color='#f5b50a' /> <span className='rating-score'>{movie.ratings.simkl.rating}</span> /10
+                                              {!loading && (
+                                                <><RiStarFill size={16} color='#f5b50a' /> <span className='rating-score'>{movie.ratings.simkl.rating}</span> /10</>
+                                              )}
                                             </p>
                                         </div>
                                     </SlideWrapper>
