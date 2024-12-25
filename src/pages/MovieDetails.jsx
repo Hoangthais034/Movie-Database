@@ -132,10 +132,10 @@ export default function MovieDetails() {
               )}
               {/* Buttons */}
               <WrapperATC flexDirection="column">
-                <button className="button sm-radius btn-primary w-full">
+                <button className="button sm-radius btn-primary">
                   Watch Now
                 </button>
-                <button className="button sm-radius btn-secondary w-full">
+                <button className="button sm-radius btn-secondary">
                   Add to Watchlist
                 </button>
               </WrapperATC>

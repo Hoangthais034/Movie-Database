@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import applyStyle from './applyStyle'
+import applyStyle from './ApplyStyles'
 
 {/* GridCell */}
 export const GridCell = styled(

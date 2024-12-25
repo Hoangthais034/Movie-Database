@@ -101,7 +101,7 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                             ).map((movie, slideIndex) => (
                                 <SwiperSlide key={slideIndex}>
                                     <SlideWrapper className="hover-scale relative">
-                                        <div className="tab-slider__image hover-scale-up w-full overflow-hidden">
+                                        <FlexBox className="tab-slider__image hover-scale-up overflow-hidden" width="100%">
                                           {loading ? (
                                             <Skeleton className="skeleton-image-posters" />
                                           ) : (
@@ -114,7 +114,7 @@ export default function TabsSlider({ title, dataType, dataObject, dataInterval, 
                                               aspectRatio="3/4"
                                             />
                                           )}
-                                        </div>
+                                        </FlexBox>
                                         <div className="tab-slider__meta">
                                             {!loading && (
                                               <a className="movie-title m-0" href={`/movie-details/${movie.ids.simkl_id}`}>

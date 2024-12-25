@@ -9,18 +9,17 @@ export { FlexBox, GridBox, GridCell };
 How to Use
 import { Flexbox, GridBox, GridCell } from "../shared/styles/LayoutModels";
 
-<Flexbox
-    className="page-404"
-    alignItems="center"
-    flexDirection="column"
-    flexGrow={1}
-    flexWrap="wrap"
-    justifyContent="center"
-    marginBottom="200px"
-    marginTop="200px"
-    element="ul"
+<FlexBox
+  alignContent="center"
+  alignItems={{ sm: "flex-start", md: "flex-start", lg: "flex-end", xl: "center" }}
+  flexDirection="column"
+  flexGrow={1}
+  flexWrap="wrap"
+  justifyContent="center"
+  marginBottom={{ sm: "40px", md: "40px", lg: "100px", xl: "200px" }}
+  marginTop="200px"
 >
-</Flexbox> 
+</FlexBox>
 <GridBox columns={2} gap="2px">
   <GridCell>foo</GridCell>
   <GridCell height={2}>bar</GridCell>

@@ -2,6 +2,7 @@ import Image from "../../Image";
 import Navigation from "./HeaderNavigation";
 import { Link } from "react-router";
 import { HeaderWrap } from "./StyleHeader";
+import { FlexBox } from "../../../shared/styles/LayoutModels/LayoutModels";
 
 export default function Header() {
   return (
@@ -19,7 +20,7 @@ export default function Header() {
         </Link>
       </div>
       <Navigation />
-      <div className="header-searchbar w-full">
+      <FlexBox className="header-searchbar" width="100%">
         <div className="input_container">
           <svg
             className="input_icon"
@@ -31,7 +32,7 @@ export default function Header() {
           </svg>
           <input className="input_box" type="text" placeholder="Search" />
         </div>
-      </div>
+      </FlexBox>
     </HeaderWrap>
   );
 }

@@ -109,7 +109,7 @@ export default function SectionTrailer({title}) {
                 <SwiperSlide key={movie.id || index}>
                   <div className="slide-trailer__image">
                     <Image
-                      src={`https://wsrv.nl/?url=https://simkl.in/fanart/${movie.fanart}_medium.webp`}
+                      src={`https://wsrv.nl/?url=https://simkl.in/fanart/${movie.fanart}_w.webp`}
                       alt={movie.title || `Thumbnail ${index + 1}`}
                       className="image--wrapper shrink-0"
                       loading="lazy"

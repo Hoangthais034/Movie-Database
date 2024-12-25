@@ -70,11 +70,11 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
       >
         {(movies.length > 0 ? movies : [{ title: true }]).map((movie, index) => (
           <SwiperSlide key={index}>
-            <div className='slideshow__wrapper flex'>
+            <FlexBox className='slideshow__wrapper'>
               <FlexBox flexDirection="column" alignItems="flex-start" padding='0 16px' width={{ default: "100%", md: "66.66%" }}>
-                <div className='movie-tags flex gap-2'>
+                <FlexBox className='movie-tags' gap=".8rem">
                   {loading ? renderSkeletons() : renderMovieTags(movie)}
-                </div>
+                </FlexBox>
                 <MovieName>
                   <Headings as='h2' className='h1 text-upper'>
                     {loading ? (
@@ -117,7 +117,7 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
                   </MovieInfor>
                 </FlexBox>
                 <button 
-                  className="button flex" 
+                  className="butto          " 
                   onClick={() => handleViewDetails(movie)}
                 >
                   View Details
@@ -138,7 +138,7 @@ export default function SlideShow({ dataType, dataObject, dataInterval, totalIte
                   />
                 )}
               </SlideshowImage>
-            </div>
+            </FlexBox>
           </SwiperSlide>
         ))}
         {/* Custom Navigation Buttons */}

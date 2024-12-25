@@ -1,4 +1,4 @@
-import responsiveStyle from "./breakpoints";
+import responsiveStyle from "./ApplyBreakpoints";
 
 const applyStyle = (property, value) => {
   if (value != null) {
